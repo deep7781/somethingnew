@@ -1,25 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+// App.js
+import React from "react";
+import Home from "./Pages/Home/Home";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { Products } from "./Pages";
+import mapProducts from "./Components/mapProducts";
+import { Login } from "./Components";
+import { lazy, Suspense } from "react";
 
-function App() {
+const Cart = lazy(() => import("./Pages/Cart"));
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route
+            path="/products/:id"
+            element={<Products products={mapProducts} />}
+          />
+          <Route
+            path="/cart"
+            element={
+              <Suspense fallback={<div>loadinggg.....</div>}>
+                <Cart />
+              </Suspense>
+            }
+          />
+        </Routes>
+      </Router>
     </div>
   );
-}
-
+};
 export default App;

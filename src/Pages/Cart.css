@@ -1,0 +1,108 @@
+.cart {
+  /* position: absolute; */
+  /* width: auto; */
+  /* min-height: 746px; */
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.shoppingCart {
+  display: flex;
+  width: auto;
+  flex-direction: column;
+  min-height: 746px;
+  padding-left: 188px;
+  padding-right: 188px;
+}
+.cart h1 {
+  color: #2a254b;
+  font-family: "Clash Display";
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 140%;
+}
+
+.cartNav {
+  position: fixed;
+}
+.cartFoot {
+  position: absolute;
+}
+
+th {
+  border-bottom: 1px solid #ebe8f4;
+  margin-bottom: 12px;
+  color: #2a254b;
+  font-family: "Clash Display";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 140%;
+  text-align: left;
+}
+table {
+  border-collapse: collapse;
+}
+.cartItems {
+  display: flex;
+  flex-direction: row;
+  margin: 20px 0px;
+  gap: 10px;
+}
+.cartImg {
+  width: 109px;
+  height: 134px;
+}
+.cartImg img {
+  object-fit: cover;
+  width: 109px;
+  height: 134px;
+}
+.cartCont {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.quantity {
+  gap: 10px;
+}
+.cartEmpty {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.totalPrice {
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: column;
+  /* align-items: flex-end; */
+  color: var(--Primary, #4e4d93);
+  text-align: right;
+  font-family: "Clash Display";
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 140%; /* 28px */
+}
+
+.incDec {
+  font-family: "Clash Display";
+  border: none;
+  background: white;
+  margin: 10px;
+  transition: all ease-in-out 300ms;
+  /* color: #ebe8f4; */
+  font-family: "Satoshi";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.incDec:hover {
+  background: #ebe8f4;
+  transform: scale(1.2);
+}

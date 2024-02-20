@@ -1,0 +1,172 @@
+.pro {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  /* align-items: center; */
+  scroll-behavior: smooth;
+  background: #f9f9f9;
+}
+
+.page {
+  width: auto;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.pgleft {
+  flex: 1 0 0;
+  width: auto;
+  height: auto;
+}
+.pgleft img {
+  width: 721px;
+  height: 759px;
+}
+.pgright {
+  display: flex;
+  flex-direction: column;
+  width: auto;
+  height: auto;
+}
+.wrapper {
+  margin-top: 51px;
+  height: auto;
+  width: auto;
+  margin-left: 62px;
+  margin-right: 52px;
+}
+
+.wrap1 {
+  margin-top: 40px;
+  width: auto;
+  height: auto;
+  margin-left: 40px;
+  color: #2a254b;
+  font-family: "Clash Display";
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+.wrap2 {
+  margin-left: 40px;
+  width: auto;
+  height: auto;
+  margin-top: 12px;
+  color: #12131a;
+  font-family: "Satoshi";
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+.wrap3 {
+  margin-left: 40px;
+  margin-top: 54px;
+  width: auto;
+  height: auto;
+  color: #505977;
+  font-family: "Satoshi";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.addToCart {
+  margin: 65px 48px;
+  border: none;
+  display: flex;
+  padding: 16px 32px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  background: #2a254b;
+  cursor: pointer;
+  transition: all ease-in-out 300ms;
+}
+.addToCart span {
+  color: #fff;
+  font-family: "Satoshi";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+}
+.addToCart:hover {
+  transform: scale(1.1);
+}
+.quan {
+  display: flex;
+  flex-direction: column;
+  row-gap: 8px;
+  color: #2a254b;
+  font-family: "Clash Display";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin-left: 40px;
+}
+
+.inpBtn {
+  display: flex;
+  width: 122px;
+  padding: 12px 16px;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+}
+
+.hide {
+  position: absolute;
+  font-family: "Clash Display";
+  width: 500px;
+  height: 50px;
+  border-radius: 10px;
+  filter: blur(10px);
+  border: 1px solid black;
+  color: #ebe8f4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: -200px;
+  transform: translateY(-200px);
+}
+.show {
+  position: absolute;
+  width: 200px;
+  font-family: "Clash Display";
+  height: 50px;
+  border-radius: 10px;
+  background: white;
+  border: 1px solid black;
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: translateY(-75px);
+  transition: all ease-in-out 300ms;
+  /* top: 0; */
+}
+
+.incDec {
+  font-family: "Clash Display";
+  border: none;
+  background: white;
+  margin: 10px;
+  transition: all ease-in-out 300ms;
+  /* color: #ebe8f4; */
+  font-family: "Satoshi";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.incDec:hover {
+  background: #ebe8f4;
+  transform: scale(1.2);
+}
