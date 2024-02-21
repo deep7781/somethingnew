@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Footer, Navbar } from "../../Components";
 import pageHeader from "../../Assets/PageHeaders.png";
 import mapProducts from "../../Components/mapProducts";
@@ -6,8 +6,29 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setProductTypes } from "../../States/filterSlice";
 import { category } from "../../Components/mapProducts";
-
+import { FaArrowUp } from "react-icons/fa";
 const AllProducts = () => {
+  const [showScrollButton, setShowScrollButton] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowScrollButton(window.scrollY > 100);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+  const topRef = useRef(null);
+  const scrollToTop = () => {
+    if (topRef.current) {
+      topRef.current.scrollIntoView({
+        behavior: "smooth",
+      });
+    }
+  };
   const dispatch = useDispatch();
   const selectedProductTypes = useSelector(
     (state) => state.filters.selectedProductTypes
@@ -23,6 +44,17 @@ const AllProducts = () => {
 
   return (
     <div>
+      <div
+        ref={topRef}
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          height: 0,
+          width: 0,
+          overflow: "hidden",
+        }}
+      />
       <Navbar />
       <div className="allProducts">
         <div className="pageHeader">
@@ -68,6 +100,13 @@ const AllProducts = () => {
               ))}
           </div>
         </div>
+        {showScrollButton && (
+          <div className="scrollToTop">
+            <button onClick={scrollToTop}>
+              <FaArrowUp />
+            </button>
+          </div>
+        )}
       </div>
       <Footer />
     </div>

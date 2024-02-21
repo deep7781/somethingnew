@@ -171,6 +171,7 @@
   transform: scale(1.2);
 }
 .allProducts {
+  position: relative;
   display: flex;
   flex-direction: column;
   min-height: 700px;
@@ -240,4 +241,35 @@
 }
 .product1:hover {
   transform: scale(1.04);
+}
+
+.scrollToTop button {
+  position: fixed;
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  bottom: 20px;
+  right: 20px;
+  background-color: #ebe8f4;
+  color: black;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  /* border-radius: 5px; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  transition: all ease-in-out 300ms;
+}
+.scrollToTop button:hover {
+  transform: scale(1.2);
+}
+.scrollToTop {
+  position: fixed;
+  display: flex;
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  margin: 30px;
 }
