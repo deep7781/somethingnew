@@ -16,29 +16,29 @@ const Footer = () => {
           <div className="lft">
             <div className="cat">
               Categories
-              <a href="#">Crockery</a>
-              <a href="#">Furniture</a>
-              <a href="#">Homeware</a>
-              <a href="#">Plant pots</a>
-              <a href="#">Chairs</a>
-              <a href="#">Crockery</a>
+              <a href="/">Crockery</a>
+              <a href="/">Furniture</a>
+              <a href="/">Homeware</a>
+              <a href="/">Plant pots</a>
+              <a href="/">Chairs</a>
+              <a href="/">Crockery</a>
             </div>
 
             <div className="comp">
               Our Company
-              <a href="#">About us</a>
-              <a href="#">Vacancies</a>
-              <a href="#">Contact us</a>
-              <a href="#">Privacy</a>
-              <a href="#">Returns policy</a>
+              <a href="/">About us</a>
+              <a href="/">Vacancies</a>
+              <a href="/">Contact us</a>
+              <a href="/">Privacy</a>
+              <a href="/">Returns policy</a>
             </div>
             <div className="menu">
               Menu
-              <a href="#">New arrivals</a>
-              <a href="#">Best sellers</a>
-              <a href="#">Recently </a>
-              <a href="#">Popular </a>
-              <a href="#">All Products</a>
+              <a href="/">New arrivals</a>
+              <a href="/">Best sellers</a>
+              <a href="/">Recently </a>
+              <a href="/">Popular </a>
+              <a href="/allProducts">All Products</a>
             </div>
           </div>
           <div className="rg">

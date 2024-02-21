@@ -6,6 +6,7 @@ import { Products } from "./Pages";
 import mapProducts from "./Components/mapProducts";
 import { Login } from "./Components";
 import { lazy, Suspense } from "react";
+import AllProducts from "./Pages/Products/AllProducts";
 
 const Cart = lazy(() => import("./Pages/Cart"));
 
@@ -17,7 +18,7 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route
-            path="/products/:id"
+            path="/allProducts/:id"
             element={<Products products={mapProducts} />}
           />
           <Route
@@ -27,6 +28,10 @@ const App = () => {
                 <Cart />
               </Suspense>
             }
+          />
+          <Route
+            path="/allProducts"
+            element={<AllProducts products={mapProducts} />}
           />
         </Routes>
       </Router>

@@ -1,18 +1,13 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Footer, Navbar } from "../Components";
-import {
-  addToCart,
-  removeItem,
-  remove,
-  initializeCartFromLocalStorage,
-} from "../States/cartSlice";
+import { addToCart, removeItem, remove } from "../States/cartSlice";
 import "./Cart.css";
 import { Link } from "react-router-dom";
 
 const Cart = () => {
   const dispatch = useDispatch();
-  const cart = useSelector((state) => state.cart);
+  // const cart = useSelector((state) => state.cart);
 
   const cartItems = useSelector((state) => state.cart.cart);
   const grandTotal = Array.isArray(cartItems)
@@ -102,7 +97,8 @@ const Cart = () => {
 
         {!cartItems.length && (
           <pre className="cartEmpty">
-            Cart is Empty. Go to <Link to="/">Home</Link> and start shopping!
+            Cart is Empty. Go to <Link to="/allProducts">Products</Link> and
+            start shopping!
           </pre>
         )}
       </div>

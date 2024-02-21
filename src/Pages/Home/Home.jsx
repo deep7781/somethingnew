@@ -1,6 +1,6 @@
 import React from "react";
 import { Navbar, Footer } from "../../Components";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import rightImage from "../../Assets/Right Image.png";
 import "../Home/Home.css";
 import sprout from "../../Assets/Sprout.svg";
@@ -33,6 +33,12 @@ const mapFeature = [
   },
 ];
 const Home = () => {
+  const navigate = useNavigate();
+
+  const handleView = () => {
+    navigate("/allProducts");
+  };
+  const firstFourProducts = mapProducts.slice(0, 4);
   return (
     <div>
       <Navbar />
@@ -43,7 +49,9 @@ const Home = () => {
               <div className="head">
                 The furniture brand for the future, with timeless designs
               </div>
-              <button className="btn">View Collection</button>
+              <button className="btn1" onClick={handleView}>
+                View Collection
+              </button>
             </div>
             <div className="bottom">
               A new era in eco friendly furniture with Avelon, the French luxury
@@ -52,7 +60,7 @@ const Home = () => {
             </div>
           </div>
           <div className="right">
-            <img src={rightImage} alt="image" />
+            <img src={rightImage} alt={rightImage} />
           </div>
         </div>
       </div>
@@ -74,11 +82,11 @@ const Home = () => {
         <div className="productName">New Ceramics</div>
 
         <div className="products">
-          {mapProducts.map((item) => {
+          {firstFourProducts.map((item) => {
             return (
-              <Link to={`/products/${item.id}`}>
+              <Link to={`/allProducts/${item.id}`}>
                 <div className="product">
-                  <img src={item.image} alt="" />
+                  <img src={item.image} alt={item.name} />
                   <div className="details">
                     <p className="name">{item.name}</p>
                     <p className="pr">£{item.price}</p>
@@ -89,7 +97,9 @@ const Home = () => {
           })}
         </div>
         <div className="view">
-          <p>View Collection</p>
+          <Link to="/allProducts">
+            <p>View Collection</p>
+          </Link>
         </div>
       </div>
       <Footer />

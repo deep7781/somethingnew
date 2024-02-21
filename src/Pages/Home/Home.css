@@ -13,7 +13,7 @@ body {
   color: antiquewhite;
 }
 .container {
-  z-index: -1;
+  /* z-index: -1; */
   width: auto;
   height: auto;
   display: flex;
@@ -44,7 +44,7 @@ body {
   font-weight: 400;
   line-height: 140%;
 }
-.btn {
+.btn1 {
   margin-top: 41px;
   cursor: pointer;
   color: #fff;
@@ -55,6 +55,15 @@ body {
   align-items: flex-start;
   gap: 10px;
   background: rgba(249, 249, 249, 0.15);
+  transition: all ease-in-out 300ms;
+  /* margin-right: 530px; */
+  /* text-align: center; */
+  /* margin-left: 60px; */
+  color: #f9f9f9;
+}
+
+.btn1:hover {
+  transform: scale(1.2);
 }
 .top {
   width: auto;
@@ -232,15 +241,24 @@ body {
   align-items: center;
   background: #f9f9f9;
   margin: 42px 635px 56px 635px;
+  text-decoration: none;
+  transition: all ease-in-out 300ms;
 }
-
+.view a {
+  text-decoration: none;
+  color: #2a254b;
+}
 .view p {
+  text-decoration: none;
   color: #2a254b;
   font-family: "Satoshi";
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
   line-height: 150%; /* 24px */
+}
+.view:hover {
+  transform: scale(1.1);
 }
 @media (max-width: 1400px) {
   .right {
@@ -267,7 +285,7 @@ body {
     margin: 0;
   }
 
-  .btn {
+  .btn1 {
     /* flex: 1; */
     width: 100%;
     justify-content: center;
