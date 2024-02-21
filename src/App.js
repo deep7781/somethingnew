@@ -3,7 +3,7 @@ import React from "react";
 import Home from "./Pages/Home/Home";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Products } from "./Pages";
-import mapProducts from "./Components/mapProducts";
+import { mapProducts } from "./Components/mapProducts";
 import { Login } from "./Components";
 import { lazy, Suspense } from "react";
 import AllProducts from "./Pages/Products/AllProducts";

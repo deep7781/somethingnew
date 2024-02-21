@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import mapProducts from "../Components/mapProducts";
-import { useEffect } from "react";
+import { mapProducts } from "../Components/mapProducts";
 
 const initialState = {
   cart: [],

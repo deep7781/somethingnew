@@ -273,3 +273,15 @@
   justify-content: flex-end;
   margin: 30px;
 }
+.prPrice {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+}
+.prCheck {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}

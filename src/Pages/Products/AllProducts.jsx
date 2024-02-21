@@ -1,11 +1,15 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Footer, Navbar } from "../../Components";
 import pageHeader from "../../Assets/PageHeaders.png";
-import mapProducts from "../../Components/mapProducts";
+import { mapProducts, priceRanges } from "../../Components/mapProducts";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { setProductTypes } from "../../States/filterSlice";
-import { category } from "../../Components/mapProducts";
+import {
+  setProductTypes,
+  setProductPrice,
+  setProductByArtist,
+} from "../../States/filterSlice";
+import { category, artist } from "../../Components/mapProducts";
 import { FaArrowUp } from "react-icons/fa";
 const AllProducts = () => {
   const [showScrollButton, setShowScrollButton] = useState(false);
@@ -33,7 +37,10 @@ const AllProducts = () => {
   const selectedProductTypes = useSelector(
     (state) => state.filters.selectedProductTypes
   );
-
+  const selectedProductPrice = useSelector(
+    (state) => state.filters.selectedProductPrice
+  );
+  const selectedArtists = useSelector((state) => state.filters.selectedArtists);
   const handleCheckboxChange = (value) => {
     const newProductTypes = selectedProductTypes.includes(value)
       ? selectedProductTypes.filter((item) => item !== value)
@@ -41,7 +48,20 @@ const AllProducts = () => {
 
     dispatch(setProductTypes(newProductTypes));
   };
+  const handlePriceChange = (value) => {
+    const newProductPrice = selectedProductPrice.includes(value)
+      ? selectedProductPrice.filter((range) => range !== value)
+      : [...selectedProductPrice, value];
 
+    dispatch(setProductPrice(newProductPrice));
+  };
+  const handleArtist = (value) => {
+    const newArtist = selectedArtists.includes(value)
+      ? selectedArtists.filter((item) => item !== value)
+      : [...selectedArtists, value];
+
+    dispatch(setProductByArtist(newArtist));
+  };
   return (
     <div>
       <div
@@ -77,6 +97,40 @@ const AllProducts = () => {
                     <label htmlFor={value}>{value}</label>
                   </span>
                 ))}
+                <div className="prPrice">
+                  <p>Price</p>
+                  <div className="prCheck">
+                    {priceRanges.map((range) => (
+                      <span key={range}>
+                        <input
+                          type="checkbox"
+                          name="price"
+                          value={range}
+                          onChange={() => handlePriceChange(range)}
+                          checked={selectedProductPrice.includes(range)}
+                        />
+                        <label htmlFor={range}>{range}</label>
+                      </span>
+                    ))}
+                    <div className="prArtist">
+                      <p>Designer</p>
+                      <div className="prCheck">
+                        {artist.map((value) => (
+                          <span key={value}>
+                            <input
+                              type="checkbox"
+                              name="price"
+                              value={value}
+                              onChange={() => handleArtist(value)}
+                              checked={selectedArtists.includes(value)}
+                            />
+                            <label htmlFor={value}>{value}</label>
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </form>
           </div>
@@ -84,8 +138,12 @@ const AllProducts = () => {
             {mapProducts
               .filter(
                 (item) =>
-                  selectedProductTypes.length === 0 ||
-                  selectedProductTypes.includes(item.category)
+                  (selectedProductTypes.length === 0 ||
+                    selectedProductTypes.includes(item.category)) &&
+                  (selectedProductPrice.length === 0 ||
+                    selectedProductPrice.includes(item.priceRange)) &&
+                  (selectedArtists.length === 0 ||
+                    selectedArtists.includes(item.artist))
               )
               .map((item) => (
                 <Link key={item.id} to={`/allProducts/${item.id}`}>

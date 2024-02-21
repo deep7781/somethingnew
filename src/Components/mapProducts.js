@@ -7,13 +7,14 @@ import chair3 from "../Assets/chair3.png";
 import pot2 from "../Assets/pot2.png";
 import table from "../Assets/Photo.png";
 import lamp2 from "../Assets/lamp2.png";
-
+const priceRanges = ["0-99", "100-199", "200-299", "300+"];
 const mapProducts = [
   {
     id: "chair1",
     image: chair,
     category: "Furniture",
     name: "The Dandy chair",
+    artist: "Robert Smith",
     price: 250,
     description:
       "A timeless design, with premium materials features as one of our most popular and iconic pieces. The dandy chair is perfect for any stylish living space with beech legs and lambskin leather upholstery.",
@@ -27,6 +28,7 @@ const mapProducts = [
     category: "Homeware",
     quantity: 1,
     image: pot,
+    artist: "Robert Smith",
     name: "Rustic Vase Set",
     price: 155,
     description:
@@ -40,6 +42,7 @@ const mapProducts = [
     category: "Homeware",
     quantity: 1,
     image: vase,
+    artist: "Robert Smith",
     name: "The Silky Vase",
     price: 125,
     description:
@@ -52,6 +55,7 @@ const mapProducts = [
     id: "lamp1",
     quantity: 1,
     image: lamp,
+    artist: "Liam Gallagher",
     category: "Light Fittings",
     name: "The Lucy Lamp",
     price: 399,
@@ -65,7 +69,8 @@ const mapProducts = [
     id: "chair2",
     quantity: 1,
     image: chair2,
-    category: "Sofas",
+    artist: "Liam Gallagher",
+    category: "Light Fittings",
     name: "The Lucy Lamp",
     price: 399,
     description:
@@ -79,8 +84,9 @@ const mapProducts = [
     quantity: 1,
     category: "Light Fittings",
     image: lamp2,
+    artist: "Biggie Smalls",
     name: "The Lucy Lamp",
-    price: 399,
+    price: 259,
     description:
       "A timeless design, with premium materials features as one of our most popular and iconic pieces. The dandy chair is perfect for any stylish living space with beech legs and lambskin leather upholstery.",
     height: "110cm",
@@ -92,8 +98,9 @@ const mapProducts = [
     quantity: 1,
     image: chair3,
     category: "Furniture",
+    artist: "Biggie Smalls",
     name: "The Lucy Lamp",
-    price: 399,
+    price: 159,
     description:
       "A timeless design, with premium materials features as one of our most popular and iconic pieces. The dandy chair is perfect for any stylish living space with beech legs and lambskin leather upholstery.",
     height: "110cm",
@@ -105,8 +112,9 @@ const mapProducts = [
     quantity: 1,
     image: pot2,
     category: "Accessories",
+    artist: "Biggie Smalls",
     name: "The Lucy Lamp",
-    price: 399,
+    price: 299,
     description:
       "A timeless design, with premium materials features as one of our most popular and iconic pieces. The dandy chair is perfect for any stylish living space with beech legs and lambskin leather upholstery.",
     height: "110cm",
@@ -117,6 +125,7 @@ const mapProducts = [
     id: "table",
     quantity: 1,
     image: table,
+    artist: "Thom Yorke",
     category: "Furniture",
     name: "The Lucy Lamp",
     price: 399,
@@ -130,9 +139,10 @@ const mapProducts = [
     id: "table1",
     quantity: 1,
     image: table,
-    category: "Fenil",
+    artist: "Thom Yorke",
+    category: "Furniture",
     name: "The Lucy Lamp",
-    price: 399,
+    price: 39,
     description:
       "A timeless design, with premium materials features as one of our most popular and iconic pieces. The dandy chair is perfect for any stylish living space with beech legs and lambskin leather upholstery.",
     height: "110cm",
@@ -140,6 +150,26 @@ const mapProducts = [
     depth: "50cm",
   },
 ];
+
+const art = new Set();
+for (let i = 0; i < mapProducts.length; i++) {
+  art.add(mapProducts[i].artist);
+}
+export const artist = Array.from(art);
+
+const productsPrice = mapProducts.map((item) => {
+  const price = item.price;
+  const priceRange =
+    price < 100
+      ? "0-99"
+      : price < 200
+      ? "100-199"
+      : price < 300
+      ? "200-299"
+      : "300+";
+  return { ...item, priceRange };
+});
+
 const proSet = new Set();
 
 for (let i = 0; i < mapProducts.length; i++) {
@@ -147,4 +177,5 @@ for (let i = 0; i < mapProducts.length; i++) {
 }
 
 export const category = Array.from(proSet);
-export default mapProducts;
+
+export { productsPrice as mapProducts, priceRanges };

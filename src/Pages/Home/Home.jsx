@@ -7,7 +7,7 @@ import sprout from "../../Assets/Sprout.svg";
 import purchase from "../../Assets/Purchase.svg";
 import delivery from "../../Assets/Delivery.svg";
 import check from "../../Assets/Checkmark--outline.svg";
-import mapProducts from "../../Components/mapProducts";
+import { mapProducts } from "../../Components/mapProducts";
 const mapFeature = [
   {
     logo: <img src={delivery} alt="logo" />,
