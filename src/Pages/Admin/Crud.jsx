@@ -11,7 +11,8 @@ import {
   setProductByArtist,
 } from "../../States/filterSlice";
 import { FaArrowUp } from "react-icons/fa";
-const AllProducts = () => {
+
+const Crud = () => {
   const [showScrollButton, setShowScrollButton] = useState(false);
   // const [products, setProducts] = useState([]);
 
@@ -112,6 +113,8 @@ const AllProducts = () => {
 
     dispatch(setProductByArtist(newArtist));
   };
+
+  // Return The UI
   return (
     <div>
       <div
@@ -125,7 +128,7 @@ const AllProducts = () => {
           overflow: "hidden",
         }}
       />
-      <Navbar />
+
       <div className="allProducts">
         <div className="pageHeader">
           <img src={pageHeader} alt="" />
@@ -224,4 +227,4 @@ const AllProducts = () => {
   );
 };
 
-export default AllProducts;
+export default Crud;

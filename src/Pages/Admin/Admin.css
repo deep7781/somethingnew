@@ -36,19 +36,18 @@
 }
 .adminSubmit {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   /* border-radius: 10px; */
 }
+.adminSubmit a {
+  text-decoration: none;
+}
 .adminSubmit button {
-  /* border: none; */
+  display: flex;
+  flex-direction: row;
   cursor: pointer;
   font-family: "Clash Display";
-  /* font-size: 20px; */
-  /* width: 200px; */
-  /* height: 50px; */
-  /* border-radius: 10px; */
-  /* transition: all ease-in-out 300ms; */
 }
 
 .cssbuttons-io-button {
