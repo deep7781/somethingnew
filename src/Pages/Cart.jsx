@@ -96,13 +96,15 @@ const Cart = () => {
               </td>
             </tr>
             <tr>
-              <td className="checkoutTD" colSpan="3">
-                <div className="checkOut">
-                  <Link to="/payment">
-                    <button>Go To Checkout</button>
-                  </Link>
-                </div>
-              </td>
+              {cartItems.length >= 1 && (
+                <td className="checkoutTD" colSpan="3">
+                  <div className="checkOut">
+                    <Link to="/payment">
+                      <button>Go To Checkout</button>
+                    </Link>
+                  </div>
+                </td>
+              )}
             </tr>
           </tfoot>
         </table>
