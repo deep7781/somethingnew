@@ -1,6 +1,7 @@
 .loginNav {
   display: flex;
   justify-content: center;
+  font-family: "Clash Display";
   align-items: center;
   width: auto;
   padding: 10px;

@@ -1,20 +1,45 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Footer, Navbar } from "../../Components";
 import pageHeader from "../../Assets/PageHeaders.png";
-import { mapProducts, priceRanges } from "../../Components/mapProducts";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { getUser } from "../../States/adminSlice";
+
 import {
   setProductTypes,
   setProductPrice,
   setProductByArtist,
 } from "../../States/filterSlice";
-import { category, artist } from "../../Components/mapProducts";
 import { FaArrowUp } from "react-icons/fa";
 const AllProducts = () => {
   const [showScrollButton, setShowScrollButton] = useState(false);
+  // const [products, setProducts] = useState([]);
+
+  const data = useSelector((state) => state.admin.getUserData);
+  console.log(data);
+  const dispatch = useDispatch();
+
+  //Category Mapped
+  const cat = useSelector((state) => state.admin.getUserData);
+  const items = cat.map((item) => item.category);
+  const cata = new Set();
+  for (let i = 0; i < items.length; i++) {
+    cata.add(items[i]);
+  }
+  const category = Array.from(cata);
+  console.log("catg", cata);
+
+  //Artists Mapped
+  const artistItems = cat.map((item) => item.artist);
+  const art = new Set();
+  for (let i = 0; i < artistItems.length; i++) {
+    art.add(artistItems[i]);
+  }
+  const artist = Array.from(art);
 
   useEffect(() => {
+    dispatch(getUser());
+
     const handleScroll = () => {
       setShowScrollButton(window.scrollY > 100);
     };
@@ -24,7 +49,8 @@ const AllProducts = () => {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [dispatch]);
+
   const topRef = useRef(null);
   const scrollToTop = () => {
     if (topRef.current) {
@@ -33,7 +59,7 @@ const AllProducts = () => {
       });
     }
   };
-  const dispatch = useDispatch();
+
   const selectedProductTypes = useSelector(
     (state) => state.filters.selectedProductTypes
   );
@@ -41,6 +67,7 @@ const AllProducts = () => {
     (state) => state.filters.selectedProductPrice
   );
   const selectedArtists = useSelector((state) => state.filters.selectedArtists);
+  //productType filter
   const handleCheckboxChange = (value) => {
     const newProductTypes = selectedProductTypes.includes(value)
       ? selectedProductTypes.filter((item) => item !== value)
@@ -48,13 +75,17 @@ const AllProducts = () => {
 
     dispatch(setProductTypes(newProductTypes));
   };
-  const handlePriceChange = (value) => {
-    const newProductPrice = selectedProductPrice.includes(value)
-      ? selectedProductPrice.filter((range) => range !== value)
-      : [...selectedProductPrice, value];
 
-    dispatch(setProductPrice(newProductPrice));
-  };
+  //priceFilter
+  // const handlePriceChange = (value) => {
+  //   const newProductPrice = selectedProductPrice.includes(value)
+  //     ? selectedProductPrice.filter((range) => range !== value)
+  //     : [...selectedProductPrice, value];
+
+  //   dispatch(setProductPrice(newProductPrice));
+  // };
+
+  //Artist Filter
   const handleArtist = (value) => {
     const newArtist = selectedArtists.includes(value)
       ? selectedArtists.filter((item) => item !== value)
@@ -97,7 +128,7 @@ const AllProducts = () => {
                     <label htmlFor={value}>{value}</label>
                   </span>
                 ))}
-                <div className="prPrice">
+                {/* <div className="prPrice">
                   <p>Price</p>
                   <div className="prCheck">
                     {priceRanges.map((range) => (
@@ -112,30 +143,31 @@ const AllProducts = () => {
                         <label htmlFor={range}>{range}</label>
                       </span>
                     ))}
-                    <div className="prArtist">
-                      <p>Designer</p>
-                      <div className="prCheck">
-                        {artist.map((value) => (
-                          <span key={value}>
-                            <input
-                              type="checkbox"
-                              name="price"
-                              value={value}
-                              onChange={() => handleArtist(value)}
-                              checked={selectedArtists.includes(value)}
-                            />
-                            <label htmlFor={value}>{value}</label>
-                          </span>
-                        ))}
-                      </div>
-                    </div>
+                  </div>
+
+                  </div> */}
+                <div className="prArtist">
+                  <p>Designer</p>
+                  <div className="prCheck">
+                    {artist.map((value) => (
+                      <span key={value}>
+                        <input
+                          type="checkbox"
+                          name="price"
+                          value={value}
+                          onChange={() => handleArtist(value)}
+                          checked={selectedArtists.includes(value)}
+                        />
+                        <label htmlFor={value}>{value}</label>
+                      </span>
+                    ))}
                   </div>
                 </div>
               </div>
             </form>
           </div>
           <div className="productCards1">
-            {mapProducts
+            {data
               .filter(
                 (item) =>
                   (selectedProductTypes.length === 0 ||
@@ -149,6 +181,7 @@ const AllProducts = () => {
                 <Link key={item.id} to={`/allProducts/${item.id}`}>
                   <div className="product1">
                     <img src={item.image} alt={item.name} />
+                    {/* {console.log("image", item.image.image1)} */}
                     <div className="details">
                       <p className="name">{item.name}</p>
                       <p className="pr">£{item.price}</p>

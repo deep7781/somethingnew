@@ -1,5 +1,5 @@
 import lamp from "../Assets/lamp.png";
-import chair from "../Assets/chair.jpg";
+import chair from "../Assets/chair.png";
 import vase from "../Assets/vase.png";
 import pot from "../Assets/pot.png";
 import chair2 from "../Assets/chair2.png";
@@ -150,7 +150,6 @@ const mapProducts = [
     depth: "50cm",
   },
 ];
-
 const art = new Set();
 for (let i = 0; i < mapProducts.length; i++) {
   art.add(mapProducts[i].artist);

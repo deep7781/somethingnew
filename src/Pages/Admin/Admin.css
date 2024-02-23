@@ -1,0 +1,136 @@
+.admin {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: "Clash Display";
+}
+.adminPanel {
+  font-size: 2rem;
+}
+.forms {
+  font-size: larger;
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+  border-radius: 20px;
+  /* align-items: center; */
+  width: auto;
+  padding: 40px;
+  border: 1px solid black;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.forms div {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+}
+.forms div input {
+  border-radius: 5px;
+  width: 401px;
+  height: 29px;
+}
+.adminSubmit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* border-radius: 10px; */
+}
+.adminSubmit button {
+  /* border: none; */
+  cursor: pointer;
+  font-family: "Clash Display";
+  /* font-size: 20px; */
+  /* width: 200px; */
+  /* height: 50px; */
+  /* border-radius: 10px; */
+  /* transition: all ease-in-out 300ms; */
+}
+
+.cssbuttons-io-button {
+  color: white;
+  font-family: inherit;
+  padding: 0.35em;
+  padding-left: 1.2em;
+  font-size: 17px;
+  font-weight: 500;
+  border-radius: 0.9em;
+  border: none;
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  color: black;
+  overflow: hidden;
+  position: relative;
+  height: 2.8em;
+  padding-right: 3.3em;
+  cursor: pointer;
+}
+
+.cssbuttons-io-button .icon {
+  background: white;
+  margin-left: 1em;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 2.2em;
+  width: 2.2em;
+  border-radius: 0.7em;
+
+  right: 0.3em;
+  transition: all 0.3s;
+}
+
+.cssbuttons-io-button:hover .icon {
+  width: calc(100% - 0.6em);
+}
+
+.cssbuttons-io-button .icon svg {
+  width: 1.1em;
+  transition: transform 0.3s;
+  color: black;
+}
+
+.cssbuttons-io-button:hover .icon svg {
+  transform: translateX(0.1em);
+}
+
+.cssbuttons-io-button:active .icon {
+  transform: scale(0.95);
+}
+.show {
+  position: absolute;
+  width: 200px;
+  font-family: "Clash Display";
+  height: 50px;
+  border-radius: 10px;
+  background: white;
+  border: 1px solid black;
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: translateY(-75px);
+  transition: all ease-in-out 300ms;
+  /* top: 0; */
+}
+.hide {
+  position: absolute;
+  font-family: "Clash Display";
+  width: 500px;
+  height: 50px;
+  border-radius: 10px;
+  filter: blur(10px);
+  border: 1px solid black;
+  color: #ebe8f4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: -200px;
+  transform: translateY(-200px);
+}

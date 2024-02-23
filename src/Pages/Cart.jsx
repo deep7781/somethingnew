@@ -4,6 +4,7 @@ import { Footer, Navbar } from "../Components";
 import { addToCart, removeItem, remove } from "../States/cartSlice";
 import "./Cart.css";
 import { Link } from "react-router-dom";
+import { getUser } from "../States/adminSlice";
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -13,9 +14,11 @@ const Cart = () => {
   const grandTotal = Array.isArray(cartItems)
     ? cartItems.reduce((total, item) => total + item.amount, 0)
     : 0;
+  const data = useSelector((state) => state.admin.getUserData);
 
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cartItems));
+    getUser();
   }, [cartItems]);
 
   return (
@@ -89,6 +92,15 @@ const Cart = () => {
                       <div>£{grandTotal}</div>
                     </>
                   )}
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td className="checkoutTD" colSpan="3">
+                <div className="checkOut">
+                  <Link to="/payment">
+                    <button>Go To Checkout</button>
+                  </Link>
                 </div>
               </td>
             </tr>

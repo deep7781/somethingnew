@@ -3,11 +3,18 @@ import { Navbar, Footer } from "../../Components";
 import { Link, useNavigate } from "react-router-dom";
 import rightImage from "../../Assets/Right Image.png";
 import "../Home/Home.css";
+import { mapProducts } from "../../Components/mapProducts";
 import sprout from "../../Assets/Sprout.svg";
 import purchase from "../../Assets/Purchase.svg";
 import delivery from "../../Assets/Delivery.svg";
 import check from "../../Assets/Checkmark--outline.svg";
-import { mapProducts } from "../../Components/mapProducts";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
+import { getData } from "../../States/adminSlice";
+import { createAsyncThunk } from "@reduxjs/toolkit";
+import { useEffect } from "react";
+import { getUser } from "../../States/adminSlice";
+
 const mapFeature = [
   {
     logo: <img src={delivery} alt="logo" />,
@@ -33,12 +40,23 @@ const mapFeature = [
   },
 ];
 const Home = () => {
+  const data = useSelector((state) => state.admin.getUserData);
+  console.log(data);
+
+  const firstFourProducts = data.slice(0, 4);
+
+  useEffect(() => {
+    dispatch(getUser());
+  }, []);
+
+  const dispatch = useDispatch();
+
   const navigate = useNavigate();
 
   const handleView = () => {
     navigate("/allProducts");
   };
-  const firstFourProducts = mapProducts.slice(0, 4);
+
   return (
     <div>
       <Navbar />
@@ -67,9 +85,9 @@ const Home = () => {
       <div className="features">
         <div className="que">What makes our brand different</div>
         <div className="fBlocks">
-          {mapFeature.map((item) => {
+          {mapFeature.map((item, index) => {
             return (
-              <div className="blocks">
+              <div className="blocks" key={index}>
                 {item.logo}
                 <p className="info">{item.info}</p>
                 <p className="brief">{item.brief}</p>
@@ -80,13 +98,12 @@ const Home = () => {
       </div>
       <div className="listings">
         <div className="productName">New Ceramics</div>
-
         <div className="products">
-          {firstFourProducts.map((item) => {
+          {/* {data.map((item, index) => {
             return (
               <Link to={`/allProducts/${item.id}`}>
-                <div className="product">
-                  <img src={item.image} alt={item.name} />
+                <div className="product" key={index}>
+                  <img src={[item.image]} alt="" />
                   <div className="details">
                     <p className="name">{item.name}</p>
                     <p className="pr">£{item.price}</p>
@@ -94,7 +111,19 @@ const Home = () => {
                 </div>
               </Link>
             );
-          })}
+          })} */}
+
+          {firstFourProducts.map((item) => (
+            <Link to={`/allProducts/${item.id}`}>
+              <div className="product">
+                <img src={[item.image]} alt="" />
+                <div className="details">
+                  <p className="name">{item.name}</p>
+                  <p className="pr">£{item.price}</p>
+                </div>
+              </div>
+            </Link>
+          ))}
         </div>
         <div className="view">
           <Link to="/allProducts">

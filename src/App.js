@@ -1,12 +1,13 @@
-// App.js
-import React from "react";
+import React, { useEffect } from "react";
 import Home from "./Pages/Home/Home";
+import Admin from "./Pages/Admin/Admin";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Products } from "./Pages";
 import { mapProducts } from "./Components/mapProducts";
 import { Login } from "./Components";
 import { lazy, Suspense } from "react";
 import AllProducts from "./Pages/Products/AllProducts";
+import Payment from "./Pages/Payment";
 
 const Cart = lazy(() => import("./Pages/Cart"));
 
@@ -17,10 +18,8 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
-          <Route
-            path="/allProducts/:id"
-            element={<Products products={mapProducts} />}
-          />
+          <Route path="/allProducts/:id" element={<Products />} />
+          <Route path="/admin" element={<Admin />} />
           <Route
             path="/cart"
             element={
@@ -29,10 +28,8 @@ const App = () => {
               </Suspense>
             }
           />
-          <Route
-            path="/allProducts"
-            element={<AllProducts products={mapProducts} />}
-          />
+          <Route path="/allProducts" element={<AllProducts />} />
+          <Route path="/payment" element={<Payment />} />
         </Routes>
       </Router>
     </div>
