@@ -3,7 +3,7 @@ import { Footer, Navbar } from "../../Components";
 import pageHeader from "../../Assets/PageHeaders.png";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getUser } from "../../States/adminSlice";
+import { getUser, deleteProduct } from "../../States/adminSlice";
 
 import {
   setProductTypes,
@@ -11,6 +11,7 @@ import {
   setProductByArtist,
 } from "../../States/filterSlice";
 import { FaArrowUp } from "react-icons/fa";
+import Loader from "../../Components/Loader/Loader";
 
 const Crud = () => {
   const [showScrollButton, setShowScrollButton] = useState(false);
@@ -55,9 +56,7 @@ const Crud = () => {
   });
   //getting data
   useEffect(() => {
-    setInterval(() => {
-      dispatch(getUser());
-    }, [2000]);
+    dispatch(getUser());
 
     const handleScroll = () => {
       setShowScrollButton(window.scrollY > 100);
@@ -113,117 +112,150 @@ const Crud = () => {
 
     dispatch(setProductByArtist(newArtist));
   };
+  //handleRemove
+  const handleRemove = (productId) => {
+    dispatch(deleteProduct(productId))
+      .then(() => {
+        dispatch(getUser());
+      })
+      .catch((error) => {
+        console.error("Error removing product:", error);
+      });
+  };
+  //handle Update
+  const handleUpdate = () => {
+    console.log("Update Successfully");
+  };
+  const loading = useSelector((state) => state.admin.loading);
 
-  // Return The UI
+  {
+    /*<-------------------------------Here Goes The UI Component ---------------------------------------------------->*/
+  }
   return (
-    <div>
-      <div
-        ref={topRef}
-        style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          height: 0,
-          width: 0,
-          overflow: "hidden",
-        }}
-      />
+    <>
+      {loading && <Loader />}
+      <div className={loading ? "blur" : ""}>
+        <div
+          ref={topRef}
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            height: 0,
+            width: 0,
+            overflow: "hidden",
+          }}
+        />
 
-      <div className="allProducts">
-        <div className="pageHeader">
-          <img src={pageHeader} alt="" />
-        </div>
-        <div className="productDetails">
-          <div className="filters">
-            <form>
-              <div className="prType">
-                <p> Product-Type</p>
-                {category.map((value) => (
-                  <span key={value}>
-                    <input
-                      type="checkbox"
-                      name="products"
-                      value={value}
-                      onChange={() => handleCheckboxChange(value)}
-                      checked={selectedProductTypes.includes(value)}
-                    />
-                    <label htmlFor={value}>{value}</label>
-                  </span>
-                ))}
-                <div className="prPrice">
-                  <p>Price</p>
-                  <div className="prCheck">
-                    {priceRanges.map((range) => (
-                      <span key={range}>
-                        <input
-                          type="checkbox"
-                          name="price"
-                          value={range}
-                          onChange={() => handlePriceChange(range)}
-                          checked={selectedProductPrice.includes(range)}
-                        />
-                        <label htmlFor={range}>{range}</label>
-                      </span>
-                    ))}
-                  </div>
-                </div>
-                <div className="prArtist">
-                  <p>Designer</p>
-                  <div className="prCheck">
-                    {artist.map((value) => (
+        <div>
+          <div className="allProducts">
+            <div className="pageHeader">
+              <img src={pageHeader} alt="" />
+            </div>
+            <div className="productDetails">
+              <div className="filters">
+                <form>
+                  <div className="prType">
+                    <p> Product-Type</p>
+                    {category.map((value) => (
                       <span key={value}>
                         <input
                           type="checkbox"
-                          name="price"
+                          name="products"
                           value={value}
-                          onChange={() => handleArtist(value)}
-                          checked={selectedArtists.includes(value)}
+                          onChange={() => handleCheckboxChange(value)}
+                          checked={selectedProductTypes.includes(value)}
                         />
                         <label htmlFor={value}>{value}</label>
                       </span>
                     ))}
+                    <div className="prPrice">
+                      <p>Price</p>
+                      <div className="prCheck">
+                        {priceRanges.map((range) => (
+                          <span key={range}>
+                            <input
+                              type="checkbox"
+                              name="price"
+                              value={range}
+                              onChange={() => handlePriceChange(range)}
+                              checked={selectedProductPrice.includes(range)}
+                            />
+                            <label htmlFor={range}>{range}</label>
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                    <div className="prArtist">
+                      <p>Designer</p>
+                      <div className="prCheck">
+                        {artist.map((value) => (
+                          <span key={value}>
+                            <input
+                              type="checkbox"
+                              name="price"
+                              value={value}
+                              onChange={() => handleArtist(value)}
+                              checked={selectedArtists.includes(value)}
+                            />
+                            <label htmlFor={value}>{value}</label>
+                          </span>
+                        ))}
+                      </div>
+                    </div>
                   </div>
-                </div>
+                </form>
               </div>
-            </form>
-          </div>
-          <div className="productCards1">
-            {productsPrice
-              .filter(
-                (item) =>
-                  (selectedProductTypes.length === 0 ||
-                    selectedProductTypes.includes(item.category)) &&
-                  (selectedProductPrice.length === 0 ||
-                    selectedProductPrice.includes(item.priceRange)) &&
-                  (selectedArtists.length === 0 ||
-                    selectedArtists.includes(item.artist))
-              )
-              .map((item) => (
-                <Link key={item.id} to={`/allProducts/${item.id}`}>
-                  <div className="product1">
-                    <div className="productImage">
-                      <img src={item.image} alt={item.name} />
+              <div className="productCards1">
+                {productsPrice
+                  .filter(
+                    (item) =>
+                      (selectedProductTypes.length === 0 ||
+                        selectedProductTypes.includes(item.category)) &&
+                      (selectedProductPrice.length === 0 ||
+                        selectedProductPrice.includes(item.priceRange)) &&
+                      (selectedArtists.length === 0 ||
+                        selectedArtists.includes(item.artist))
+                  )
+                  .map((item) => (
+                    <div className="allpro">
+                      <Link key={item.id} to={`/allProducts/${item.id}`}>
+                        <div className="product1">
+                          <div className="productImage">
+                            <img src={item.image} alt={item.name} />
+                          </div>
+                          {/* {console.log("image", item.image.image1)} */}
+                          <div className="details">
+                            <p className="name">{item.name}</p>
+                            <p className="pr">£{item.price}</p>
+                          </div>
+                        </div>
+                      </Link>
+                      <div className="proBtn">
+                        <button onClick={() => handleRemove(item.id)}>
+                          Remove
+                        </button>
+                        <Link to="/admin/updateData">
+                          <button onClick={() => handleUpdate(item.id)}>
+                            Update
+                          </button>
+                        </Link>
+                      </div>
                     </div>
-                    {/* {console.log("image", item.image.image1)} */}
-                    <div className="details">
-                      <p className="name">{item.name}</p>
-                      <p className="pr">£{item.price}</p>
-                    </div>
-                  </div>
-                </Link>
-              ))}
+                  ))}
+              </div>
+            </div>
+            {showScrollButton && (
+              <div className="scrollToTop">
+                <button onClick={scrollToTop}>
+                  <FaArrowUp />
+                </button>
+              </div>
+            )}
           </div>
         </div>
-        {showScrollButton && (
-          <div className="scrollToTop">
-            <button onClick={scrollToTop}>
-              <FaArrowUp />
-            </button>
-          </div>
-        )}
       </div>
-      <Footer />
-    </div>
+    </>
   );
 };
 

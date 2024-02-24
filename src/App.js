@@ -8,22 +8,26 @@ import { Login } from "./Components";
 import { lazy, Suspense } from "react";
 // import AllProducts from "./Pages/Products/AllProducts";
 import Payment from "./Pages/Payment";
+import Loader from "./Components/Loader/Loader";
 
 const Cart = lazy(() => import("./Pages/Cart"));
 const AllProducts = lazy(() => import("./Pages/Products/AllProducts"));
+
 const App = () => {
   return (
     <div>
       <Router>
         <Routes>
+          <Route path="/admin/updateData" element={<Admin />} />
           <Route path="/admin" element={<Admin />} />
+          <Route path="/loading" element={<Loader />} />
           <Route path="/admin/addOrDelete" element={<Crud />} />
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route
             path="/allProducts/:id"
             element={
-              <Suspense fallback={<p>Loading....</p>}>
+              <Suspense fallback={<Loader />}>
                 <Products />
               </Suspense>
             }

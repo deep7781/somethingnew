@@ -25,7 +25,17 @@ export const getUser = createAsyncThunk("getUser", async (_, { dispatch }) => {
     console.error("Error fetching user data:", error);
   }
 });
-
+export const deleteProduct = createAsyncThunk("deleteProduct", async (id) => {
+  try {
+    const response = await axios.delete(
+      `https://65d726ed27d9a3bc1d7a5206.mockapi.io/mapProducts/${id}`
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error creating user:", error);
+    throw error;
+  }
+});
 // export const getUser = createAsyncThunk(
 //   "getUser",
 //   async (data, { rejected }) => {
@@ -37,7 +47,12 @@ export const getUser = createAsyncThunk("getUser", async (_, { dispatch }) => {
 //   }
 // );
 
-const initialState = { setUserData: [], getUserData: [] };
+const initialState = {
+  setUserData: [],
+  getUserData: [],
+  loading: false,
+  error: null,
+};
 const adminSlice = createSlice({
   name: "admin",
   initialState,
@@ -49,6 +64,19 @@ const adminSlice = createSlice({
     getData: (state, action) => {
       state.getUserData = action.payload;
     },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(getUser.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(getUser.fulfilled, (state) => {
+        state.loading = false;
+      })
+      .addCase(getUser.rejected, (state, action) => {
+        state.error = action.payload;
+        state.loading = true;
+      });
   },
 });
 

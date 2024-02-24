@@ -8,7 +8,7 @@ import { getUser } from "../States/adminSlice";
 
 const Cart = () => {
   const dispatch = useDispatch();
-  const priceRanges = ["0-99", "100-199", "200-299", "300+"];
+
   const cartItems = useSelector((state) => state.cart.cart);
   const grandTotal = Array.isArray(cartItems)
     ? cartItems.reduce((total, item) => total + item.amount, 0)
