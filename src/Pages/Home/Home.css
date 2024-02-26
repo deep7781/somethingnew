@@ -281,8 +281,11 @@ body {
   .other {
     display: none;
   }
-
-  .cart {
+  .show {
+    visibility: hidden;
+  }
+  .cart,
+  .noOfItems {
     display: none;
   }
 }
@@ -300,6 +303,7 @@ body {
     margin: 24px;
     text-align: justify;
   }
+
   .top {
     /* margin: 0; */
     margin: 24px;

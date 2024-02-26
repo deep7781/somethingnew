@@ -36,20 +36,57 @@ export const deleteProduct = createAsyncThunk("deleteProduct", async (id) => {
     throw error;
   }
 });
-// export const getUser = createAsyncThunk(
-//   "getUser",
-//   async (data, { rejected }) => {
-//     const response = await fetch(
-//       "https://65d726ed27d9a3bc1d7a5206.mockapi.io/mapProducts"
-//     );
-//     const result = await response.json();
-//     console.log(result);
-//   }
-// );
+export const registerUser = createAsyncThunk("registeruser", async (data) => {
+  try {
+    const response = await axios.post(
+      `https://65d726ed27d9a3bc1d7a5206.mockapi.io/userInfo`,
+      data,
+      { headers: { "Content-Type": "application/json" } }
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error registering User", error);
+    throw error;
+  }
+});
+
+export const loginUser = createAsyncThunk(
+  "loginUser",
+  async (_, { dispatch }) => {
+    try {
+      const repsonse = await axios.get(
+        `https://65d726ed27d9a3bc1d7a5206.mockapi.io/userInfo`
+      );
+      dispatch(adminSlice.actions.getLoginData(repsonse.data));
+    } catch (error) {
+      console.error("Error getting user data from server", error);
+      throw error;
+    }
+  }
+);
+export const updateProduct = createAsyncThunk(
+  "updateProduct",
+  async ({ data, id }, { rejectWithValue }) => {
+    try {
+      const response = await axios.put(
+        `https://65d726ed27d9a3bc1d7a5206.mockapi.io/mapProducts/${id}`,
+        data,
+        {
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      console.error("Error updating product:", error);
+      return rejectWithValue(error.message);
+    }
+  }
+);
 
 const initialState = {
   setUserData: [],
   getUserData: [],
+  getLoginData: null,
   loading: false,
   error: null,
 };
@@ -63,6 +100,9 @@ const adminSlice = createSlice({
 
     getData: (state, action) => {
       state.getUserData = action.payload;
+    },
+    getLoginData: (state, action) => {
+      state.getLoginData = action.payload;
     },
   },
   extraReducers: (builder) => {

@@ -3,15 +3,11 @@ import { Navbar, Footer } from "../../Components";
 import { Link, useNavigate } from "react-router-dom";
 import rightImage from "../../Assets/Right Image.png";
 import "../Home/Home.css";
-import { mapProducts } from "../../Components/mapProducts";
 import sprout from "../../Assets/Sprout.svg";
 import purchase from "../../Assets/Purchase.svg";
 import delivery from "../../Assets/Delivery.svg";
 import check from "../../Assets/Checkmark--outline.svg";
 import { useDispatch, useSelector } from "react-redux";
-import axios from "axios";
-import { getData } from "../../States/adminSlice";
-import { createAsyncThunk } from "@reduxjs/toolkit";
 import { useEffect } from "react";
 import { getUser } from "../../States/adminSlice";
 
@@ -44,12 +40,11 @@ const Home = () => {
   console.log(data);
 
   const firstFourProducts = data.slice(0, 4);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getUser());
-  }, []);
-
-  const dispatch = useDispatch();
+  }, [dispatch]);
 
   const navigate = useNavigate();
 
@@ -110,7 +105,7 @@ const Home = () => {
                   </div>
                 </div>
               </Link>
-            );
+            );  
           })} */}
 
           {firstFourProducts.map((item) => (

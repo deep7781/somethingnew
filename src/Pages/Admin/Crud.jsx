@@ -1,5 +1,4 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Footer, Navbar } from "../../Components";
 import pageHeader from "../../Assets/PageHeaders.png";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -67,7 +66,7 @@ const Crud = () => {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [dispatch]);
+  }, [data, dispatch]);
   //for Goto top arrow
   const topRef = useRef(null);
   const scrollToTop = () => {
@@ -123,14 +122,9 @@ const Crud = () => {
       });
   };
   //handle Update
-  const handleUpdate = () => {
-    console.log("Update Successfully");
-  };
-  const loading = useSelector((state) => state.admin.loading);
 
-  {
-    /*<-------------------------------Here Goes The UI Component ---------------------------------------------------->*/
-  }
+  const loading = useSelector((state) => state.admin.loading);
+  //----------------------------------------------------------------------------------------
   return (
     <>
       {loading && <Loader />}
@@ -235,10 +229,8 @@ const Crud = () => {
                         <button onClick={() => handleRemove(item.id)}>
                           Remove
                         </button>
-                        <Link to="/admin/updateData">
-                          <button onClick={() => handleUpdate(item.id)}>
-                            Update
-                          </button>
+                        <Link to={`/admin/updateData/${item.id}`}>
+                          <button>Update</button>
                         </Link>
                       </div>
                     </div>

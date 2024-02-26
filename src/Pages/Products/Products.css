@@ -194,6 +194,7 @@
   flex-direction: column;
   align-items: center;
   flex-shrink: 0;
+  gap: 10px;
 }
 
 .productCards1 {
@@ -289,12 +290,19 @@
   flex-direction: column;
   align-items: flex-start;
   gap: 20px;
+  font-family: "Satoshi";
 }
 .prCheck {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 12px;
+}
+.prPrice p {
+  font-family: "Clash Display";
+}
+.prArtist p {
+  font-family: "Clash Display";
 }
 .prArtist {
   display: flex;

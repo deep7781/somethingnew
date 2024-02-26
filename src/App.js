@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Home from "./Pages/Home/Home";
 import Admin from "./Pages/Admin/Admin";
 import Crud from "./Pages/Admin/Crud";
@@ -9,6 +9,7 @@ import { lazy, Suspense } from "react";
 // import AllProducts from "./Pages/Products/AllProducts";
 import Payment from "./Pages/Payment";
 import Loader from "./Components/Loader/Loader";
+import Register from "./Components/Login/Register";
 
 const Cart = lazy(() => import("./Pages/Cart"));
 const AllProducts = lazy(() => import("./Pages/Products/AllProducts"));
@@ -18,7 +19,8 @@ const App = () => {
     <div>
       <Router>
         <Routes>
-          <Route path="/admin/updateData" element={<Admin />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/admin/updateData/:id" element={<Admin />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="/loading" element={<Loader />} />
           <Route path="/admin/addOrDelete" element={<Crud />} />

@@ -116,7 +116,9 @@
 .smallRes.visible {
   left: 0%;
 }
-
+.smallRes a {
+  text-decoration: none;
+}
 .hidden {
   display: none;
 }
@@ -127,7 +129,7 @@
 
 .prof {
   font-family: "Clash Display";
-  position: fixed;
+  position: absolute;
   display: flex;
   flex-direction: column;
   height: auto;
@@ -136,13 +138,22 @@
   justify-content: center;
   background: white;
   color: #22202e;
+  padding: 10px;
+  transform: translateY(-100%);
+  margin-right: 10px;
+  height: auto;
 }
 
 .prof.show {
-  top: 10%;
+  transition: all ease-in-out 300ms;
+  padding: 10px;
+  transform: translateY(90%);
+  margin-right: 10px;
+  height: auto;
 }
-.prof.hide {
-  display: none;
+.prof a {
+  text-decoration: none;
+  color: #22202e;
 }
 
 .cartDet {
